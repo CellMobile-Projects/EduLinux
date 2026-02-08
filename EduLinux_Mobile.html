@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class=""><head><script>window.livecodes = window.livecodes || {};</script><title>EduLinux Mobile</title><meta name="title" content="EduLinux Mobile"><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><style id="__livecodes_styles__"></style><script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" async=""></script><script type="importmap">{
+  "imports": {}
+}</script></head><body>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduLinux Mobile</title>
+
+<style>
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Helvetica Neue", system-ui, sans-serif;
+  background: #000;
+  overflow: hidden;
+}
+
+/* ===== BOOT ===== */
+#boot {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, #444, #000);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  letter-spacing: 3px;
+  text-shadow: 0 4px 8px rgba(0,0,0,.8);
+}
+
+/* ===== LOCK ===== */
+#lock {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(#5fa3e3, #274b7a),
+    url('https://www.transparenttextures.com/patterns/noisy.png');
+  display: none;
+  color: white;
+}
+
+#lockClock {
+  position: absolute;
+  top: 80px;
+  width: 100%;
+  text-align: center;
+  font-size: 52px;
+  font-weight: 300;
+  text-shadow:
+    0 3px 6px rgba(0,0,0,.6);
+}
+
+/* ===== SLIDER ===== */
+#slideTrack {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  right: 20px;
+  height: 64px;
+  background:
+    linear-gradient(#eee, #bbb);
+  border-radius: 32px;
+  box-shadow:
+    inset 0 3px 6px rgba(255,255,255,.6),
+    inset 0 -3px 6px rgba(0,0,0,.3);
+}
+
+#slider {
+  width: 64px;
+  height: 64px;
+  background:
+    linear-gradient(#fff, #ccc);
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-shadow:
+    0 6px 10px rgba(0,0,0,.5),
+    inset 0 2px 4px rgba(255,255,255,.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #333;
+}
+
+/* ===== LAUNCHER ===== */
+#launcher {
+  position: fixed;
+  inset: 0;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  padding: 24px;
+  background:
+    linear-gradient(#7db9ff, #3a6fcf),
+    url('https://www.transparenttextures.com/patterns/fabric-of-squares.png');
+}
+
+.app {
+  background:
+    linear-gradient(#fdfdfd, #cfcfcf);
+  border-radius: 22px;
+  text-align: center;
+  padding: 18px;
+  box-shadow:
+    inset 0 3px 6px rgba(255,255,255,.9),
+    inset 0 -3px 6px rgba(0,0,0,.2),
+    0 8px 16px rgba(0,0,0,.5);
+  font-weight: 600;
+}
+
+/* ===== APP VIEW ===== */
+#appView {
+  position: fixed;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  background:
+    linear-gradient(#f8f8f8, #cfcfcf);
+}
+
+#appContent {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  font-size: 16px;
+}
+
+/* ===== NAV BAR ===== */
+#navBar {
+  height: 70px;
+  background:
+    linear-gradient(#e6e6e6, #b0b0b0);
+  box-shadow:
+    inset 0 3px 5px rgba(255,255,255,.6),
+    0 -4px 10px rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#waffle {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+#waffle div {
+  background: #333;
+  border-radius: 5px;
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.4);
+}
+
+/* ===== CALCULATOR ===== */
+#calc {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+#calcDisplay {
+  grid-column: span 4;
+  background:
+    linear-gradient(#222, #000);
+  color: #7CFF7C;
+  font-size: 26px;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 3px 6px rgba(0,0,0,.8);
+  text-align: right;
+}
+
+.calcBtn {
+  background:
+    linear-gradient(#fefefe, #c9c9c9);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  font-size: 18px;
+  box-shadow:
+    inset 0 3px 6px rgba(255,255,255,.9),
+    inset 0 -3px 6px rgba(0,0,0,.2),
+    0 4px 8px rgba(0,0,0,.4);
+}
+</style>
+
+
+
+
+<div id="boot">EduLinux</div>
+
+<div id="lock">
+  <div id="lockClock">12:00 AM</div>
+  <div id="slideTrack">
+    <div id="slider">➜</div>
+  </div>
+</div>
+
+<div id="launcher"></div>
+
+<div id="appView">
+  <div id="appContent"></div>
+  <div id="navBar">
+    <div id="waffle"></div>
+  </div>
+</div>
+
+<script>
+/* BOOT */
+setTimeout(() => {
+  boot.style.display = "none";
+  lock.style.display = "block";
+}, 2000);
+
+/* CLOCK */
+function updateClock() {
+  const now = new Date();
+  let h = now.getHours();
+  const m = now.getMinutes().toString().padStart(2,"0");
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+  lockClock.textContent = `${h}:${m} ${ampm}`;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+/* SLIDE */
+let dragging = false;
+slider.addEventListener("touchstart",()=>dragging=true);
+document.addEventListener("touchmove",e=>{
+  if(!dragging) return;
+  let x = e.touches[0].clientX - slideTrack.offsetLeft - 32;
+  slider.style.left = Math.max(0, Math.min(x, slideTrack.offsetWidth-64))+"px";
+});
+document.addEventListener("touchend",()=>{
+  if(parseInt(slider.style.left) > slideTrack.offsetWidth-80){
+    lock.style.display="none";
+    launcher.style.display="grid";
+  }
+  slider.style.left="0px";
+  dragging=false;
+});
+
+/* APPS */
+const apps = {
+  Math:"Fun fact: The symbol ∞ was invented in 1655.",
+  Science:"Fun fact: Lightning is hotter than the sun.",
+  Notes:"Fun fact: Writing improves long-term memory.",
+  Encyclopedia:"Fun fact: Encyclopedias date back to Ancient Rome.",
+  Terminal:"Fun fact: Linux powers most servers on Earth.",
+  Calculator:"calculator"
+};
+
+for(const name in apps){
+  const d=document.createElement("div");
+  d.className="app";
+  d.textContent=name;
+  d.onclick=()=>openApp(name);
+  launcher.appendChild(d);
+}
+
+function openApp(name){
+  launcher.style.display="none";
+  appView.style.display="flex";
+  if(apps[name]==="calculator"){
+    appContent.innerHTML=`<div id="calcDisplay">0</div><div id="calc"></div>`;
+    buildCalc();
+  } else {
+    appContent.innerHTML=`<h2>${name}</h2><p>${apps[name]}</p>`;
+  }
+}
+
+/* CALC */
+function buildCalc(){
+  let v="";
+  "789/456*123-0.=+".split("").forEach(c=>{
+    const b=document.createElement("div");
+    b.className="calcBtn";
+    b.textContent=c;
+    b.onclick=()=>{
+      if(c==="="){try{v=eval(v)+"";}catch{v="Error";}}
+      else v+=c;
+      calcDisplay.textContent=v||"0";
+    };
+    calc.appendChild(b);
+  });
+}
+
+/* WAFFLE */
+for(let i=0;i<9;i++) waffle.appendChild(document.createElement("div"));
+waffle.onclick=()=>{
+  appView.style.display="none";
+  launcher.style.display="grid";
+};
+</script>
+
+
+
+<script></script></body></html>
